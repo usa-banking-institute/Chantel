@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chantel Trading | Institutional Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons (optional) -->
+    <!-- Font Awesome for WhatsApp icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body { background-color: #050810; color: white; overflow-x: hidden; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -33,31 +33,52 @@
             background-size: cover; background-position: center;
         }
 
-        .card-img-1 { background-image: url('https://images.unsplash.com/photo-1773274253973-ef08141dd1dd?q=80&w=820'); background-size: cover; height: 180px; }
-        .card-img-2 { background-image: url('https://images.unsplash.com/photo-1773273690728-3953f52b7f2d?q=80&w=932'); background-size: cover; height: 180px; }
+        /* Full image display for mentorship card */
+        .card-img-2 { 
+            background-image: url('https://images.unsplash.com/photo-1773273690728-3953f52b7f2d?q=80&w=932'); 
+            background-size: cover; 
+            background-position: center;
+            height: 240px; /* Increased height to show image fully */
+            width: 100%;
+        }
+        /* Course card image */
+        .card-img-1 { 
+            background-image: url('https://images.unsplash.com/photo-1773274253973-ef08141dd1dd?q=80&w=820'); 
+            background-size: cover; 
+            background-position: center;
+            height: 180px; 
+        }
 
         .modal { 
             display: none; 
             background: rgba(0,0,0,0.98); 
             backdrop-filter: blur(8px);
         }
-        .qr-frame { background: white; padding: 15px; border-radius: 10px; display: inline-block; }
         
-        /* telegram button style */
-        .telegram-support {
-            background: #0088cc;
+        /* WhatsApp button style (number hidden) */
+        .whatsapp-btn {
+            background: #25D366;
             transition: all 0.2s;
         }
-        .telegram-support:hover {
-            background: #0077b5;
+        .whatsapp-btn:hover {
+            background: #20b859;
             transform: scale(1.02);
         }
+
         .flwanet-badge {
             border: 1px solid #f5b81b;
             background: rgba(245, 184, 27, 0.1);
             color: #f5b81b;
         }
-        /* tiny extra shiny */
+
+        /* receipt instruction box */
+        .receipt-box {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid #25D366;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
         .shimmer {
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             background-size: 200% 100%;
@@ -68,7 +89,7 @@
 </head>
 <body>
 
-    <!-- floating shiny "Chantel" logos (low volume, snow-like) -->
+    <!-- floating shiny "Chantel" logos (low volume) -->
     <div id="logo-canvas" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
     <!-- navigation -->
@@ -76,9 +97,9 @@
         <div class="text-3xl font-black gold-gradient uppercase tracking-widest">Chantel</div>
         <div class="space-x-8 hidden md:flex items-center">
             <a href="#services" class="hover:text-yellow-500 transition">Services</a>
-            <!-- telegram direct link button (support bot) -->
-            <a href="https://t.me/Chantelsupportbot" target="_blank" class="telegram-support text-white px-5 py-2 rounded-md font-bold text-sm uppercase transition shadow-lg flex items-center gap-2">
-                <i class="fab fa-telegram-plane"></i> <span>Support Bot</span>
+            <!-- WhatsApp support button (number hidden) -->
+            <a href="https://wa.me/2347070752053?text=Hello%21%20I%27ve%20made%20a%20payment%20and%20want%20to%20submit%20my%20receipt." target="_blank" class="whatsapp-btn text-white px-5 py-2 rounded-md font-bold text-sm uppercase transition shadow-lg flex items-center gap-2">
+                <i class="fab fa-whatsapp text-lg"></i> <span>Verify Payment</span>
             </a>
             <button onclick="showHype()" class="bg-yellow-600 hover:bg-yellow-500 px-6 py-2 rounded-md font-bold text-sm uppercase transition shadow-lg">Manage My Account</button>
         </div>
@@ -93,10 +114,10 @@
         <p class="text-white/70 max-w-2xl text-xl mb-10 font-light italic">98/2 Profit Split | Full Money Back Guarantee | Approved by Flwanet</p>
         <button onclick="showHype()" class="bg-white text-black px-12 py-5 rounded-sm text-xl font-black uppercase hover:bg-yellow-500 transition duration-300 shadow-[0_0_30px_gold]">Start Investing</button>
         
-        <!-- tiny extra bot link for mobile -->
+        <!-- mobile WhatsApp link -->
         <div class="mt-8 md:hidden">
-            <a href="https://t.me/Chantelsupportbot" target="_blank" class="telegram-support inline-flex items-center gap-2 px-6 py-3 rounded-full text-white">
-                <i class="fab fa-telegram-plane"></i> t.me/Chantelsupportbot
+            <a href="https://wa.me/2347070752053?text=Hello%21%20I%27ve%20made%20a%20payment%20and%20want%20to%20submit%20my%20receipt." target="_blank" class="whatsapp-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-white">
+                <i class="fab fa-whatsapp"></i> Submit Receipt on WhatsApp
             </a>
         </div>
     </header>
@@ -113,9 +134,9 @@
                     <button onclick="showPayment('$300 - Course Enrollment')" class="w-full bg-zinc-800 py-4 rounded font-bold uppercase hover:bg-white hover:text-black transition">Get Access</button>
                 </div>
             </div>
-            <!-- mentorship card -->
+            <!-- mentorship card (full image display) -->
             <div class="bg-zinc-900 border border-yellow-600/30 rounded-xl overflow-hidden shadow-2xl shadow-yellow-900/10">
-                <div class="card-img-2"></div>
+                <div class="card-img-2" title="Mentorship preview image shown fully"></div>
                 <div class="p-8 text-center">
                     <h3 class="text-2xl font-bold mb-2 text-yellow-500 uppercase">1-on-1 Mentorship</h3>
                     <p class="text-gray-400 mb-6 font-light italic">$700 Professional Training</p>
@@ -124,13 +145,19 @@
             </div>
         </div>
 
-        <!-- additional telegram bot info (api token hidden but used for link) -->
-        <div class="mt-16 text-center text-white/40 text-sm flex flex-wrap items-center justify-center gap-3">
-            <span>🔑 bot active: @Chantelsupportbot</span>
-            <span class="w-1 h-1 bg-white/20 rounded-full"></span>
-            <span>⚡ payment via telegram</span>
-            <span class="w-1 h-1 bg-white/20 rounded-full"></span>
-            <span>✅ 98/2 guarantee</span>
+        <!-- after payment instruction (receipt submission) -->
+        <div class="mt-16 text-center">
+            <div class="receipt-box inline-block max-w-2xl mx-auto p-6">
+                <div class="flex items-center justify-center gap-3 text-2xl mb-3">
+                    <i class="fab fa-whatsapp text-[#25D366] text-4xl"></i>
+                    <span class="font-bold text-white">📎 After payment, submit your receipt</span>
+                </div>
+                <p class="text-white/80 mb-4">Send a screenshot of your transaction or the transaction hash to our verification bot on WhatsApp. Your access will be granted within 5 minutes.</p>
+                <a href="https://wa.me/2347070752053?text=Hello%21%20I%27ve%20just%20made%20a%20payment%20via%20BTC.%20Please%20verify%20my%20transaction%20%3Ctx%20hash%3E" target="_blank" class="whatsapp-btn inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-bold text-lg transition shadow-lg">
+                    <i class="fab fa-whatsapp text-2xl"></i> Click to Verify Payment
+                </a>
+                <p class="text-xs text-white/40 mt-4">Your number is private • +2347070752053 (hidden)</p>
+            </div>
         </div>
     </section>
 
@@ -146,15 +173,15 @@
                 <button onclick="showPayment('Custom Managed Account Deposit')" class="bg-white text-black px-12 py-5 rounded-full text-2xl font-black uppercase hover:scale-105 transition shadow-[0_0_50px_rgba(255,255,255,0.3)]">
                     INVEST NOW
                 </button>
-                <a href="https://t.me/Chantelsupportbot" target="_blank" class="telegram-support text-white px-8 py-5 rounded-full text-xl font-bold flex items-center gap-2">
-                    <i class="fab fa-telegram-plane text-2xl"></i> Chat on Telegram
+                <a href="https://wa.me/2347070752053?text=Hello%21%20I%20want%20to%20invest%20but%20need%20help%20with%20payment%20verification." target="_blank" class="whatsapp-btn text-white px-8 py-5 rounded-full text-xl font-bold flex items-center gap-2">
+                    <i class="fab fa-whatsapp text-2xl"></i> Verify via WhatsApp
                 </a>
             </div>
             <p class="mt-6 text-yellow-600/80">🔥 47 investors joined in the last hour – secure your spot now</p>
         </div>
     </div>
 
-    <!-- PAYMENT MODAL (BTC wallet & QR + telegram bot link) -->
+    <!-- PAYMENT MODAL (BTC wallet & QR + WhatsApp verification link) -->
     <div id="payment-modal" class="modal fixed inset-0 z-[110] flex items-center justify-center p-6 text-center" onclick="if(event.target===this) closeModals()">
         <div class="bg-white text-black p-8 rounded-2xl max-w-md w-full relative">
             <button onclick="closeModals()" class="absolute -top-12 right-0 text-white text-4xl hover:text-yellow-300">&times;</button>
@@ -162,55 +189,57 @@
                 <span class="bg-orange-500 text-white p-2 rounded-full"><i class="fa-brands fa-bitcoin"></i></span>
                 <span class="font-bold text-xl">Bitcoin (BTC)</span>
             </div>
-            <p class="text-sm text-gray-600 mb-6 leading-tight">To deposit funds, make a bitcoin transfer to the BTC-wallet shown below. Copy wallet address or scan QR code.</p>
+            <p class="text-sm text-gray-600 mb-6 leading-tight">Make a bitcoin transfer to the wallet below. After payment, click WhatsApp to submit your receipt for instant verification.</p>
             
             <!-- BTC address (from your previous version) -->
-            <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Your unique Bitcoin wallet address</p>
+            <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Bitcoin wallet address</p>
             <p id="btc-address" class="text-[11px] font-black break-all mb-4 bg-gray-100 p-3 rounded border">bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp</p>
             
             <div class="flex gap-2 mb-6">
                 <button onclick="copyBTC()" class="w-1/2 bg-yellow-400 hover:bg-yellow-300 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
                     <span>📋</span> Copy
                 </button>
-                <a href="https://t.me/Chantelsupportbot" target="_blank" class="w-1/2 telegram-support text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
-                    <i class="fab fa-telegram-plane"></i> Bot help
+                <!-- WhatsApp verification button (number hidden) -->
+                <a href="https://wa.me/2347070752053?text=Hello%21%20I%20have%20sent%20BTC%20to%20the%20address%20bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp.%20Please%20verify%20my%20payment." target="_blank" class="w-1/2 whatsapp-btn text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
+                    <i class="fab fa-whatsapp"></i> Verify
                 </a>
             </div>
 
+            <!-- NEW QR CODE IMAGE (from unsplash) -->
             <div class="qr-frame shadow-inner mb-6 flex justify-center">
-                <!-- using the same qr image as your reference -->
-                <img src="https://i.ibb.co/yFWvNq9n/Screenshot-20260312-020617.png" alt="BTC QR Code" class="w-48 h-48" onerror="this.src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp'">
+                <img src="https://images.unsplash.com/photo-1773282030649-937c9880863e?q=80&w=931&auto=format&fit=crop" alt="BTC QR Code" class="w-48 h-48 object-cover rounded-lg" onerror="this.onerror=null; this.src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp';">
             </div>
 
             <div class="text-left border-t pt-4">
-                <p class="font-bold text-sm flex items-center gap-1"><span class="text-yellow-600">✓</span> Terms</p>
-                <div class="flex justify-between text-xs mt-2 text-gray-600">
-                    <span>Average payment time</span>
-                    <span class="font-bold text-black">Instant</span>
+                <p class="font-bold text-sm flex items-center gap-1"><span class="text-green-600">✓</span> After payment</p>
+                <div class="flex items-center gap-2 mt-2 p-3 bg-green-50 rounded-lg">
+                    <i class="fab fa-whatsapp text-[#25D366] text-xl"></i>
+                    <span class="text-xs text-gray-700">Submit receipt via WhatsApp for immediate confirmation</span>
                 </div>
-                <div class="flex justify-between text-xs mt-1 text-gray-600">
-                    <span>Fee</span>
-                    <span class="font-bold text-black">0%</span>
-                </div>
-                <div class="flex justify-between text-xs mt-1 text-gray-600">
+                <div class="flex justify-between text-xs mt-3 text-gray-600">
                     <span>Guarantee</span>
                     <span class="font-bold text-green-700">Flwanet approved</span>
                 </div>
             </div>
             
-            <!-- tiny note: telegram bot token (not exposed, just as reference) -->
-            <p class="text-[8px] text-gray-300 mt-4">bot: 8218368440:AAFIyRVUstrw23xbKYzxODq_1DgtM5W6n8c • @Chantelsupportbot</p>
+            <!-- hidden number note -->
+            <p class="text-[8px] text-gray-300 mt-4">verification WhatsApp: +2347070752053 (hidden)</p>
         </div>
     </div>
 
-    <!-- footer with bot info -->
+    <!-- footer with WhatsApp only -->
     <footer class="border-t border-white/10 py-8 text-center text-white/30 text-sm">
-        <p>⚡ powered by <span class="text-yellow-600/60">@Chantelsupportbot</span> • 98/2 split • full money‑back guarantee</p>
-        <p class="mt-2 text-xs">floating shiny "Chantel" logos – low volume – just for you</p>
+        <p>⚡ 98/2 split • full money‑back guarantee • approved by Flwanet</p>
+        <div class="flex justify-center gap-2 mt-3">
+            <a href="https://wa.me/2347070752053?text=Hello%20I%20need%20support" target="_blank" class="text-[#25D366] hover:text-white transition flex items-center gap-1">
+                <i class="fab fa-whatsapp"></i> Payment verification
+            </a>
+        </div>
+        <p class="mt-2 text-xs">floating shiny "Chantel" logos – low volume</p>
     </footer>
 
     <script>
-        // ---------- floating shiny "Chantel" snow (low volume, like your reference) ----------
+        // ---------- floating shiny "Chantel" snow (low volume) ----------
         function createLogo() {
             const container = document.getElementById('logo-canvas');
             if (!container) return;
@@ -218,13 +247,12 @@
             logo.className = 'floating-logo';
             logo.innerText = 'CHANTEL'; 
             logo.style.left = Math.random() * 100 + '%';
-            logo.style.animationDuration = (Math.random() * 5 + 8) + 's'; // between 8-13s
-            logo.style.fontSize = (8 + Math.random() * 10) + 'px'; // tiny sizes
-            logo.style.opacity = 0.15 + Math.random() * 0.2; // very subtle
+            logo.style.animationDuration = (Math.random() * 5 + 8) + 's';
+            logo.style.fontSize = (8 + Math.random() * 10) + 'px';
+            logo.style.opacity = 0.15 + Math.random() * 0.2;
             container.appendChild(logo);
             setTimeout(() => { logo.remove(); }, 13000);
         }
-        // start floating logos – low volume: one every 1.8 sec (less than original)
         setInterval(createLogo, 1800);
 
         // modal functions
@@ -235,7 +263,6 @@
         function showPayment(itemName) { 
             closeModals(); 
             document.getElementById('payment-modal').style.display = 'flex'; 
-            // optional: update item description (could be used for dynamic)
         }
         function closeModals() { 
             document.getElementById('hype-modal').style.display = 'none'; 
@@ -246,22 +273,19 @@
         function copyBTC() {
             const addr = document.getElementById('btc-address').innerText;
             navigator.clipboard.writeText(addr).then(() => {
-                alert("✅ Bitcoin address copied to clipboard!\n\nYou can now paste it in your wallet or send via @Chantelsupportbot");
+                alert("✅ Bitcoin address copied!\n\nAfter sending payment, click the WhatsApp button to submit your receipt.");
             }).catch(() => {
-                // fallback
                 prompt("Manual copy (press Ctrl+C):", addr);
             });
         }
 
         // close modals on escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModals();
-            }
+            if (e.key === 'Escape') closeModals();
         });
     </script>
 
-    <!-- ensure tailwind plus inter font -->
+    <!-- Inter font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </body>
 </html>
