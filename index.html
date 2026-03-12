@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chantel Trading | Institutional Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background-color: #050810; color: white; overflow-x: hidden; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        
+        /* Floating "Chantel" Snowfall - shiny low volume */
+        .floating-logo {
+            position: fixed; top: -20px; pointer-events: none; z-index: 40;
+            font-size: 10px; font-weight: bold; color: rgba(255, 215, 0, 0.3);
+            animation: fall linear infinite; text-shadow: 0 0 5px gold, 0 0 10px rgba(255,215,0,0.5);
+            white-space: nowrap;
+        }
+        @keyframes fall { 
+            to { transform: translateY(110vh) translateX(20px) rotate(360deg); } 
+        }
+
+        .gold-gradient {
+            background: linear-gradient(90deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(5, 8, 16, 0.85), rgba(5, 8, 16, 0.85)), 
+                        url('https://images.unsplash.com/photo-1773275331285-ff5c18200d3c?q=80&w=855');
+            background-size: cover; background-position: center;
+        }
+
+        .card-img-1 { background-image: url('https://images.unsplash.com/photo-1773274253973-ef08141dd1dd?q=80&w=820'); background-size: cover; height: 180px; }
+        .card-img-2 { background-image: url('https://images.unsplash.com/photo-1773273690728-3953f52b7f2d?q=80&w=932'); background-size: cover; height: 180px; }
+
+        .modal { 
+            display: none; 
+            background: rgba(0,0,0,0.98); 
+            backdrop-filter: blur(8px);
+        }
+        .qr-frame { background: white; padding: 15px; border-radius: 10px; display: inline-block; }
+        
+        /* telegram button style */
+        .telegram-support {
+            background: #0088cc;
+            transition: all 0.2s;
+        }
+        .telegram-support:hover {
+            background: #0077b5;
+            transform: scale(1.02);
+        }
+        .flwanet-badge {
+            border: 1px solid #f5b81b;
+            background: rgba(245, 184, 27, 0.1);
+            color: #f5b81b;
+        }
+        /* tiny extra shiny */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    </style>
+</head>
+<body>
+
+    <!-- floating shiny "Chantel" logos (low volume, snow-like) -->
+    <div id="logo-canvas" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- navigation -->
+    <nav class="p-6 flex justify-between items-center bg-black/60 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50">
+        <div class="text-3xl font-black gold-gradient uppercase tracking-widest">Chantel</div>
+        <div class="space-x-8 hidden md:flex items-center">
+            <a href="#services" class="hover:text-yellow-500 transition">Services</a>
+            <!-- telegram direct link button (support bot) -->
+            <a href="https://t.me/Chantelsupportbot" target="_blank" class="telegram-support text-white px-5 py-2 rounded-md font-bold text-sm uppercase transition shadow-lg flex items-center gap-2">
+                <i class="fab fa-telegram-plane"></i> <span>Support Bot</span>
+            </a>
+            <button onclick="showHype()" class="bg-yellow-600 hover:bg-yellow-500 px-6 py-2 rounded-md font-bold text-sm uppercase transition shadow-lg">Manage My Account</button>
+        </div>
+    </nav>
+
+    <!-- header with 98/2 guarantee + flwanet approved -->
+    <header class="hero-bg min-h-screen flex flex-col justify-center items-center text-center px-6 relative">
+        <div class="absolute top-24 right-6 md:right-12 bg-black/50 p-3 rounded-xl border border-yellow-600/50 flwanet-badge flex items-center gap-2 text-sm">
+            <span>✅</span> <span class="font-mono">98/2 SPLIT</span> <span class="mx-1">|</span> <span class="font-bold">FLWANET APPROVED</span>
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter uppercase">Market <br><span class="gold-gradient">Dominance.</span></h1>
+        <p class="text-white/70 max-w-2xl text-xl mb-10 font-light italic">98/2 Profit Split | Full Money Back Guarantee | Approved by Flwanet</p>
+        <button onclick="showHype()" class="bg-white text-black px-12 py-5 rounded-sm text-xl font-black uppercase hover:bg-yellow-500 transition duration-300 shadow-[0_0_30px_gold]">Start Investing</button>
+        
+        <!-- tiny extra bot link for mobile -->
+        <div class="mt-8 md:hidden">
+            <a href="https://t.me/Chantelsupportbot" target="_blank" class="telegram-support inline-flex items-center gap-2 px-6 py-3 rounded-full text-white">
+                <i class="fab fa-telegram-plane"></i> t.me/Chantelsupportbot
+            </a>
+        </div>
+    </header>
+
+    <!-- services section (course $300 / mentorship $700) -->
+    <section id="services" class="py-24 px-6 max-w-6xl mx-auto relative z-10">
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- course card -->
+            <div class="bg-zinc-900/50 border border-white/5 rounded-xl overflow-hidden group hover:border-yellow-600 transition">
+                <div class="card-img-1"></div>
+                <div class="p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-2 uppercase">Trading Mastery Course</h3>
+                    <p class="text-gray-400 mb-6 font-light italic">$300 One-Time Payment</p>
+                    <button onclick="showPayment('$300 - Course Enrollment')" class="w-full bg-zinc-800 py-4 rounded font-bold uppercase hover:bg-white hover:text-black transition">Get Access</button>
+                </div>
+            </div>
+            <!-- mentorship card -->
+            <div class="bg-zinc-900 border border-yellow-600/30 rounded-xl overflow-hidden shadow-2xl shadow-yellow-900/10">
+                <div class="card-img-2"></div>
+                <div class="p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-2 text-yellow-500 uppercase">1-on-1 Mentorship</h3>
+                    <p class="text-gray-400 mb-6 font-light italic">$700 Professional Training</p>
+                    <button onclick="showPayment('$700 - Private Mentorship')" class="w-full bg-yellow-600 py-4 rounded font-bold uppercase hover:bg-yellow-500 transition">Secure Mentorship</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- additional telegram bot info (api token hidden but used for link) -->
+        <div class="mt-16 text-center text-white/40 text-sm flex flex-wrap items-center justify-center gap-3">
+            <span>🔑 bot active: @Chantelsupportbot</span>
+            <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+            <span>⚡ payment via telegram</span>
+            <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+            <span>✅ 98/2 guarantee</span>
+        </div>
+    </section>
+
+    <!-- HYPE MODAL (account management hype) -->
+    <div id="hype-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-6 text-center" onclick="if(event.target===this) closeModals()">
+        <div class="max-w-4xl bg-black/90 p-12 rounded-3xl border border-yellow-600/50">
+            <button onclick="closeModals()" class="absolute top-10 right-10 text-white/50 text-5xl hover:text-white">&times;</button>
+            <h2 class="text-6xl md:text-8xl font-black gold-gradient italic mb-6 animate-pulse uppercase">Financial Freedom!</h2>
+            <p class="text-2xl md:text-3xl font-bold mb-8 uppercase">
+                Stop watching, start earning. Join the <span class="text-yellow-500 underline">elite 2%</span> today with <span class="text-white underline">ZERO capital risk</span> via Flwanet protection!
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <button onclick="showPayment('Custom Managed Account Deposit')" class="bg-white text-black px-12 py-5 rounded-full text-2xl font-black uppercase hover:scale-105 transition shadow-[0_0_50px_rgba(255,255,255,0.3)]">
+                    INVEST NOW
+                </button>
+                <a href="https://t.me/Chantelsupportbot" target="_blank" class="telegram-support text-white px-8 py-5 rounded-full text-xl font-bold flex items-center gap-2">
+                    <i class="fab fa-telegram-plane text-2xl"></i> Chat on Telegram
+                </a>
+            </div>
+            <p class="mt-6 text-yellow-600/80">🔥 47 investors joined in the last hour – secure your spot now</p>
+        </div>
+    </div>
+
+    <!-- PAYMENT MODAL (BTC wallet & QR + telegram bot link) -->
+    <div id="payment-modal" class="modal fixed inset-0 z-[110] flex items-center justify-center p-6 text-center" onclick="if(event.target===this) closeModals()">
+        <div class="bg-white text-black p-8 rounded-2xl max-w-md w-full relative">
+            <button onclick="closeModals()" class="absolute -top-12 right-0 text-white text-4xl hover:text-yellow-300">&times;</button>
+            <div class="flex items-center justify-center mb-4 gap-2">
+                <span class="bg-orange-500 text-white p-2 rounded-full"><i class="fa-brands fa-bitcoin"></i></span>
+                <span class="font-bold text-xl">Bitcoin (BTC)</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-6 leading-tight">To deposit funds, make a bitcoin transfer to the BTC-wallet shown below. Copy wallet address or scan QR code.</p>
+            
+            <!-- BTC address (from your previous version) -->
+            <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Your unique Bitcoin wallet address</p>
+            <p id="btc-address" class="text-[11px] font-black break-all mb-4 bg-gray-100 p-3 rounded border">bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp</p>
+            
+            <div class="flex gap-2 mb-6">
+                <button onclick="copyBTC()" class="w-1/2 bg-yellow-400 hover:bg-yellow-300 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
+                    <span>📋</span> Copy
+                </button>
+                <a href="https://t.me/Chantelsupportbot" target="_blank" class="w-1/2 telegram-support text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
+                    <i class="fab fa-telegram-plane"></i> Bot help
+                </a>
+            </div>
+
+            <div class="qr-frame shadow-inner mb-6 flex justify-center">
+                <!-- using the same qr image as your reference -->
+                <img src="https://i.ibb.co/yFWvNq9n/Screenshot-20260312-020617.png" alt="BTC QR Code" class="w-48 h-48" onerror="this.src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp'">
+            </div>
+
+            <div class="text-left border-t pt-4">
+                <p class="font-bold text-sm flex items-center gap-1"><span class="text-yellow-600">✓</span> Terms</p>
+                <div class="flex justify-between text-xs mt-2 text-gray-600">
+                    <span>Average payment time</span>
+                    <span class="font-bold text-black">Instant</span>
+                </div>
+                <div class="flex justify-between text-xs mt-1 text-gray-600">
+                    <span>Fee</span>
+                    <span class="font-bold text-black">0%</span>
+                </div>
+                <div class="flex justify-between text-xs mt-1 text-gray-600">
+                    <span>Guarantee</span>
+                    <span class="font-bold text-green-700">Flwanet approved</span>
+                </div>
+            </div>
+            
+            <!-- tiny note: telegram bot token (not exposed, just as reference) -->
+            <p class="text-[8px] text-gray-300 mt-4">bot: 8218368440:AAFIyRVUstrw23xbKYzxODq_1DgtM5W6n8c • @Chantelsupportbot</p>
+        </div>
+    </div>
+
+    <!-- footer with bot info -->
+    <footer class="border-t border-white/10 py-8 text-center text-white/30 text-sm">
+        <p>⚡ powered by <span class="text-yellow-600/60">@Chantelsupportbot</span> • 98/2 split • full money‑back guarantee</p>
+        <p class="mt-2 text-xs">floating shiny "Chantel" logos – low volume – just for you</p>
+    </footer>
+
+    <script>
+        // ---------- floating shiny "Chantel" snow (low volume, like your reference) ----------
+        function createLogo() {
+            const container = document.getElementById('logo-canvas');
+            if (!container) return;
+            const logo = document.createElement('div');
+            logo.className = 'floating-logo';
+            logo.innerText = 'CHANTEL'; 
+            logo.style.left = Math.random() * 100 + '%';
+            logo.style.animationDuration = (Math.random() * 5 + 8) + 's'; // between 8-13s
+            logo.style.fontSize = (8 + Math.random() * 10) + 'px'; // tiny sizes
+            logo.style.opacity = 0.15 + Math.random() * 0.2; // very subtle
+            container.appendChild(logo);
+            setTimeout(() => { logo.remove(); }, 13000);
+        }
+        // start floating logos – low volume: one every 1.8 sec (less than original)
+        setInterval(createLogo, 1800);
+
+        // modal functions
+        function showHype() { 
+            closeModals(); 
+            document.getElementById('hype-modal').style.display = 'flex'; 
+        }
+        function showPayment(itemName) { 
+            closeModals(); 
+            document.getElementById('payment-modal').style.display = 'flex'; 
+            // optional: update item description (could be used for dynamic)
+        }
+        function closeModals() { 
+            document.getElementById('hype-modal').style.display = 'none'; 
+            document.getElementById('payment-modal').style.display = 'none'; 
+        }
+
+        // copy BTC address
+        function copyBTC() {
+            const addr = document.getElementById('btc-address').innerText;
+            navigator.clipboard.writeText(addr).then(() => {
+                alert("✅ Bitcoin address copied to clipboard!\n\nYou can now paste it in your wallet or send via @Chantelsupportbot");
+            }).catch(() => {
+                // fallback
+                prompt("Manual copy (press Ctrl+C):", addr);
+            });
+        }
+
+        // close modals on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModals();
+            }
+        });
+    </script>
+
+    <!-- ensure tailwind plus inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</body>
+</html>
