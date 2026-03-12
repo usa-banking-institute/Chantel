@@ -38,10 +38,9 @@
             background-image: url('https://images.unsplash.com/photo-1773273690728-3953f52b7f2d?q=80&w=932'); 
             background-size: cover; 
             background-position: center;
-            height: 240px; /* Increased height to show image fully */
+            height: 240px;
             width: 100%;
         }
-        /* Course card image */
         .card-img-1 { 
             background-image: url('https://images.unsplash.com/photo-1773274253973-ef08141dd1dd?q=80&w=820'); 
             background-size: cover; 
@@ -49,13 +48,18 @@
             height: 180px; 
         }
 
+        /* MODALS - Hidden by default with !important to ensure they never show on load */
         .modal { 
-            display: none; 
+            display: none !important; 
             background: rgba(0,0,0,0.98); 
             backdrop-filter: blur(8px);
         }
         
-        /* WhatsApp button style (number hidden) */
+        /* When active class is added via JavaScript, they become visible */
+        .modal.active { 
+            display: flex !important; 
+        }
+        
         .whatsapp-btn {
             background: #25D366;
             transition: all 0.2s;
@@ -71,7 +75,6 @@
             color: #f5b81b;
         }
 
-        /* receipt instruction box */
         .receipt-box {
             background: rgba(37, 211, 102, 0.1);
             border: 1px solid #25D366;
@@ -97,7 +100,7 @@
         <div class="text-3xl font-black gold-gradient uppercase tracking-widest">Chantel</div>
         <div class="space-x-8 hidden md:flex items-center">
             <a href="#services" class="hover:text-yellow-500 transition">Services</a>
-            <!-- WhatsApp support button (number hidden) -->
+            <!-- WhatsApp support button -->
             <a href="https://wa.me/2347070752053?text=Hello%21%20I%27ve%20made%20a%20payment%20and%20want%20to%20submit%20my%20receipt." target="_blank" class="whatsapp-btn text-white px-5 py-2 rounded-md font-bold text-sm uppercase transition shadow-lg flex items-center gap-2">
                 <i class="fab fa-whatsapp text-lg"></i> <span>Verify Payment</span>
             </a>
@@ -152,8 +155,8 @@
                     <i class="fab fa-whatsapp text-[#25D366] text-4xl"></i>
                     <span class="font-bold text-white">📎 After payment, submit your receipt</span>
                 </div>
-                <p class="text-white/80 mb-4">Send a screenshot of your transaction or the transaction hash to our verification bot on WhatsApp. Your access will be granted within 5 minutes.</p>
-                <a href="https://wa.me/2347070752053?text=Hello%21%20I%27ve%20just%20made%20a%20payment%20via%20BTC.%20Please%20verify%20my%20transaction%20%3Ctx%20hash%3E" target="_blank" class="whatsapp-btn inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-bold text-lg transition shadow-lg">
+                <p class="text-white/80 mb-4">Send a screenshot of your transaction or the transaction hash to our verification on WhatsApp. Your access will be granted within 5 minutes.</p>
+                <a href="https://wa.me/2347070752053?text=Hello%21%20I%27ve%20just%20made%20a%20payment%20via%20BTC.%20Please%20verify%20my%20transaction" target="_blank" class="whatsapp-btn inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-bold text-lg transition shadow-lg">
                     <i class="fab fa-whatsapp text-2xl"></i> Click to Verify Payment
                 </a>
                 <p class="text-xs text-white/40 mt-4">tradewithchantel</p>
@@ -161,7 +164,7 @@
         </div>
     </section>
 
-    <!-- HYPE MODAL (account management hype) -->
+    <!-- HYPE MODAL - Hidden by default, only shown when button clicked -->
     <div id="hype-modal" class="modal fixed inset-0 z-[100] flex items-center justify-center p-6 text-center" onclick="if(event.target===this) closeModals()">
         <div class="max-w-4xl bg-black/90 p-12 rounded-3xl border border-yellow-600/50">
             <button onclick="closeModals()" class="absolute top-10 right-10 text-white/50 text-5xl hover:text-white">&times;</button>
@@ -181,7 +184,7 @@
         </div>
     </div>
 
-    <!-- PAYMENT MODAL (BTC wallet & QR + WhatsApp verification link) -->
+    <!-- PAYMENT MODAL - Hidden by default, only shown when user clicks payment button -->
     <div id="payment-modal" class="modal fixed inset-0 z-[110] flex items-center justify-center p-6 text-center" onclick="if(event.target===this) closeModals()">
         <div class="bg-white text-black p-8 rounded-2xl max-w-md w-full relative">
             <button onclick="closeModals()" class="absolute -top-12 right-0 text-white text-4xl hover:text-yellow-300">&times;</button>
@@ -191,7 +194,7 @@
             </div>
             <p class="text-sm text-gray-600 mb-6 leading-tight">Make a bitcoin transfer to the wallet below. After payment, click WhatsApp to submit your receipt for instant verification.</p>
             
-            <!-- BTC address (from your previous version) -->
+            <!-- BTC address -->
             <p class="text-[10px] text-gray-500 uppercase font-bold mb-1">Bitcoin wallet address</p>
             <p id="btc-address" class="text-[11px] font-black break-all mb-4 bg-gray-100 p-3 rounded border">bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp</p>
             
@@ -199,13 +202,13 @@
                 <button onclick="copyBTC()" class="w-1/2 bg-yellow-400 hover:bg-yellow-300 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
                     <span>📋</span> Copy
                 </button>
-                <!-- WhatsApp verification button (number hidden) -->
+                <!-- WhatsApp verification button -->
                 <a href="https://wa.me/2347070752053?text=Hello%21%20I%20have%20sent%20BTC%20to%20the%20address%20bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp.%20Please%20verify%20my%20payment." target="_blank" class="w-1/2 whatsapp-btn text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition">
                     <i class="fab fa-whatsapp"></i> Verify
                 </a>
             </div>
 
-            <!-- NEW QR CODE IMAGE (from unsplash) -->
+            <!-- QR CODE IMAGE -->
             <div class="qr-frame shadow-inner mb-6 flex justify-center">
                 <img src="https://images.unsplash.com/photo-1773282030649-937c9880863e?q=80&w=931&auto=format&fit=crop" alt="BTC QR Code" class="w-48 h-48 object-cover rounded-lg" onerror="this.onerror=null; this.src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=bitcoin:bc1qqgy9uf9uzqu4c85kdngkn7vlurwwqjxmwa4wcp';">
             </div>
@@ -223,11 +226,11 @@
             </div>
             
             <!-- hidden number note -->
-           
+            <p class="text-[8px] text-gray-300 mt-4">tradewithchantel</p>
         </div>
     </div>
 
-    <!-- footer with WhatsApp only -->
+    <!-- footer -->
     <footer class="border-t border-white/10 py-8 text-center text-white/30 text-sm">
         <p>⚡ 98/2 split • full money‑back guarantee • approved by Flwanet</p>
         <div class="flex justify-center gap-2 mt-3">
@@ -239,7 +242,7 @@
     </footer>
 
     <script>
-        // ---------- floating shiny "Chantel" snow (low volume) ----------
+        // ---------- floating shiny "Chantel" snow ----------
         function createLogo() {
             const container = document.getElementById('logo-canvas');
             if (!container) return;
@@ -255,18 +258,20 @@
         }
         setInterval(createLogo, 1800);
 
-        // modal functions
+        // MODAL CONTROL FUNCTIONS - Using classList for better control
         function showHype() { 
             closeModals(); 
-            document.getElementById('hype-modal').style.display = 'flex'; 
+            document.getElementById('hype-modal').classList.add('active');
         }
+        
         function showPayment(itemName) { 
             closeModals(); 
-            document.getElementById('payment-modal').style.display = 'flex'; 
+            document.getElementById('payment-modal').classList.add('active');
         }
+        
         function closeModals() { 
-            document.getElementById('hype-modal').style.display = 'none'; 
-            document.getElementById('payment-modal').style.display = 'none'; 
+            document.getElementById('hype-modal').classList.remove('active');
+            document.getElementById('payment-modal').classList.remove('active');
         }
 
         // copy BTC address
@@ -282,6 +287,11 @@
         // close modals on escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeModals();
+        });
+
+        // Double-check on page load that no modals are visible
+        window.addEventListener('load', function() {
+            closeModals();
         });
     </script>
 
